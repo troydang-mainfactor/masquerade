@@ -905,6 +905,9 @@
       --header-template-columns: 1fr auto auto auto auto;
 
       grid-template-areas: 'center leftB rightA leftA rightB';
+
+      /* Tighter icon spacing: 36px tap boxes instead of 44px */
+      --button-size: 36px;
       grid-column: span 3;
       column-gap: 0;
       align-items: center;
@@ -927,7 +930,7 @@
       .header__icon--menu {
         grid-area: leftA;
         justify-content: center;
-        min-width: var(--header-mobile-bookend);
+        min-width: var(--button-size);
         padding-inline: 0;
       }
 
@@ -938,6 +941,8 @@
 
       header-actions .account-button {
         grid-area: rightA;
+        width: var(--button-size);
+        justify-content: center;
       }
 
       header-actions > .header-actions__action:not(.account-button) {
@@ -953,6 +958,9 @@
     --header-template-columns: 1fr auto auto auto auto;
 
     grid-template-areas: 'center leftB rightA leftA rightB';
+
+    /* Tighter icon spacing: 36px tap boxes instead of 44px */
+    --button-size: 36px;
     grid-column: span 3;
     column-gap: 0;
     align-items: center;
@@ -975,7 +983,7 @@
     .header__icon--menu {
       grid-area: leftA;
       justify-content: center;
-      min-width: var(--header-mobile-bookend);
+      min-width: var(--button-size);
       padding-inline: 0;
     }
 
@@ -986,6 +994,8 @@
 
     header-actions .account-button {
       grid-area: rightA;
+      width: var(--button-size);
+      justify-content: center;
     }
 
     header-actions > .header-actions__action:not(.account-button) {
