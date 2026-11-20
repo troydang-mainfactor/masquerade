@@ -1539,4 +1539,27 @@
   .drawer-localization .language-selector .svg-wrapper.icon-caret svg {
     transform: none;
   }
+  /* Masquerade: menu drawer slides in from the right edge */
+  .menu-drawer {
+    transform: translateX(100%);
+    inset-inline-start: auto;
+    inset-inline-end: 0;
+    padding-inline: 0 max(0px, calc(var(--safe-area-inset-right) - var(--drawer-padding)));
+    border-inline-end: none;
+    border-inline-start: var(--style-border-drawer);
+  }
+
+  [dir='rtl'] .menu-drawer {
+    transform: translateX(-100%);
+    padding-inline-start: 0;
+    padding-inline-end: max(0px, calc(var(--safe-area-inset-left) - var(--drawer-padding)));
+  }
+
+  .menu-open > .menu-drawer {
+    transform: translateX(0);
+  }
+
+  .menu-drawer > .menu-drawer__close-button {
+    align-self: flex-end;
+  }
 {% endstylesheet %}
