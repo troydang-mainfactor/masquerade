@@ -901,10 +901,10 @@
     }
 
     @media screen and (max-width: 749px) {
-      --header-template-columns: var(--header-mobile-bookend) var(--header-mobile-bookend) 1fr
-        var(--header-mobile-bookend) var(--header-mobile-bookend);
+      /* Masquerade: menu | logo (left-aligned) ... search | account + cart */
+      --header-template-columns: var(--header-mobile-bookend) 1fr var(--header-mobile-bookend) auto;
 
-      grid-template-areas: 'leftA leftB center rightA rightB';
+      grid-template-areas: 'leftA center rightA rightB';
       grid-column: span 3;
       column-gap: 0;
       align-items: center;
@@ -916,18 +916,12 @@
 
       .header-logo {
         grid-area: center;
-      }
-
-      &:not(:has(header-actions)) .search-action {
-        grid-area: leftB;
-      }
-
-      &:not(:has(shopify-account)) .search-action {
-        grid-area: rightA;
+        justify-self: start;
+        justify-content: flex-start;
       }
 
       .search-action {
-        grid-area: leftB;
+        grid-area: rightA;
       }
 
       .header__icon--menu {
@@ -945,10 +939,10 @@
   /* not ideal but we need to duplicate these styles for when touch comes into play
     We could avoid the duplication using js to set the data-menu-style attribute on small screens instead of using @media queries */
   #header-component[data-menu-style='drawer'] .header__columns {
-    --header-template-columns: var(--header-mobile-bookend) var(--header-mobile-bookend) 1fr
-      var(--header-mobile-bookend) var(--header-mobile-bookend);
+    /* Masquerade: menu | logo (left-aligned) ... search | account + cart */
+    --header-template-columns: var(--header-mobile-bookend) 1fr var(--header-mobile-bookend) auto;
 
-    grid-template-areas: 'leftA leftB center rightA rightB';
+    grid-template-areas: 'leftA center rightA rightB';
     grid-column: span 3;
     column-gap: 0;
     align-items: center;
@@ -960,18 +954,12 @@
 
     .header-logo {
       grid-area: center;
-    }
-
-    &:not(:has(header-actions)) .search-action {
-      grid-area: leftB;
-    }
-
-    &:not(:has(shopify-account)) .search-action {
-      grid-area: rightA;
+      justify-self: start;
+      justify-content: flex-start;
     }
 
     .search-action {
-      grid-area: leftB;
+      grid-area: rightA;
     }
 
     /* Pin glyphs to the content edge of the 44px bookend; keep the full tap target */
