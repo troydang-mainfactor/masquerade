@@ -1,0 +1,60 @@
+{%- comment -%}
+  Page background image. Settings: Theme settings > Page layout > Background image.
+  "Static" uses a fixed pseudo-element instead of background-attachment: fixed (broken on iOS Safari).
+{%- endcomment -%}
+{%- liquid
+  assign desktop = settings.page_background_image
+  assign mobile = settings.page_background_image_mobile | default: desktop
+  if settings.page_background_attachment == 'fixed'
+    assign target = 'body::before'
+  else
+    assign target = 'body'
+  endif
+  if settings.page_background_size == 'auto'
+    assign repeat = 'repeat'
+  else
+    assign repeat = 'no-repeat'
+  endif
+  assign overlay = settings.page_background_overlay | divided_by: 100.0
+-%}
+{%- if mobile != blank -%}
+{% style %}
+  {{ target }} {
+    {%- if target == 'body::before' %}
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+    {%- endif %}
+    background-color: var(--color-background);
+    background-size: {{ settings.page_background_size }};
+    background-position: {{ settings.page_background_position }};
+    background-repeat: {{ repeat }};
+    {%- if desktop != blank %}
+      background-image: linear-gradient(rgb(var(--color-background-rgb) / {{ overlay }}), rgb(var(--color-background-rgb) / {{ overlay }})), url({{ desktop | image_url: width: 3000 }});
+    {%- endif %}
+  }
+  {%- if mobile != blank %}
+    @media screen and (max-width: 749px) {
+      {{ target }} {
+        background-image: linear-gradient(rgb(var(--color-background-rgb) / {{ overlay }}), rgb(var(--color-background-rgb) / {{ overlay }})), url({{ mobile | image_url: width: 1500 }});
+      }
+    }
+  {%- endif %}
+  /* Mobile menu drawer and its submenus use the page background image instead of the (transparent) page color */
+  .menu-drawer,
+  .menu-drawer__submenu {
+    background-color: var(--color-background);
+    background-size: cover;
+    background-position: {{ settings.page_background_position }};
+    background-repeat: no-repeat;
+    background-image: linear-gradient(rgb(var(--color-background-rgb) / {{ overlay }}), rgb(var(--color-background-rgb) / {{ overlay }})), url({{ mobile | image_url: width: 1500 }});
+  }
+  {%- if settings.page_background_transparent_sections %}
+    .shopify-section:not(.header-section) .section-background:not([class*='color-custom-']) {
+      background-color: transparent;
+    }
+  {%- endif %}
+{% endstyle %}
+{%- endif -%}
