@@ -901,10 +901,10 @@
     }
 
     @media screen and (max-width: 749px) {
-      --header-template-columns: var(--header-mobile-bookend) var(--header-mobile-bookend) 1fr
-        var(--header-mobile-bookend) var(--header-mobile-bookend);
+      /* Masquerade: logo pinned left, icons grouped on the right */
+      --header-template-columns: 1fr auto auto auto auto;
 
-      grid-template-areas: 'leftA leftB center rightA rightB';
+      grid-template-areas: 'center leftB rightA rightB leftA';
       grid-column: span 3;
       column-gap: 0;
       align-items: center;
@@ -916,6 +916,8 @@
 
       .header-logo {
         grid-area: center;
+        justify-self: start;
+        justify-content: flex-start;
       }
 
       &:not(:has(header-actions)) .search-action {
@@ -931,7 +933,9 @@
       }
 
       .header__icon--menu {
-        justify-content: flex-start;
+        grid-area: leftA;
+        justify-content: flex-end;
+        min-width: var(--header-mobile-bookend);
         padding-inline: 0;
       }
 
@@ -945,10 +949,10 @@
   /* not ideal but we need to duplicate these styles for when touch comes into play
     We could avoid the duplication using js to set the data-menu-style attribute on small screens instead of using @media queries */
   #header-component[data-menu-style='drawer'] .header__columns {
-    --header-template-columns: var(--header-mobile-bookend) var(--header-mobile-bookend) 1fr
-      var(--header-mobile-bookend) var(--header-mobile-bookend);
+    /* Masquerade: logo pinned left, icons grouped on the right */
+    --header-template-columns: 1fr auto auto auto auto;
 
-    grid-template-areas: 'leftA leftB center rightA rightB';
+    grid-template-areas: 'center leftB rightA rightB leftA';
     grid-column: span 3;
     column-gap: 0;
     align-items: center;
@@ -960,6 +964,8 @@
 
     .header-logo {
       grid-area: center;
+      justify-self: start;
+      justify-content: flex-start;
     }
 
     &:not(:has(header-actions)) .search-action {
@@ -976,7 +982,9 @@
 
     /* Pin glyphs to the content edge of the 44px bookend; keep the full tap target */
     .header__icon--menu {
-      justify-content: flex-start;
+      grid-area: leftA;
+      justify-content: flex-end;
+      min-width: var(--header-mobile-bookend);
       padding-inline: 0;
     }
 
