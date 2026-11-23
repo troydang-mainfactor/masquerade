@@ -189,6 +189,18 @@ h1, h2, h3, h4, h5, h6,
       try {
         const url = new URL(link.href);
 
+        // Header menu (desktop + mobile drawer): only Gift Certificates opens in a new tab
+        if (link.closest('#header-component')) {
+          const isGift = /gift/i.test(link.href + ' ' + link.textContent);
+          if (isGift) {
+            link.target = '_blank';
+            link.rel = 'noopener noreferrer';
+          } else if (link.target === '_blank') {
+            link.removeAttribute('target');
+          }
+          return;
+        }
+
         if (
           url.protocol.startsWith('http') &&
           url.hostname !== currentHost
