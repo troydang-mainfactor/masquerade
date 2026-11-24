@@ -1,0 +1,100 @@
+{% doc %}
+  Footer credits line: copyright | Powered by Mainfactor | Accessibility Adjustments (accessiBe trigger)
+{% enddoc %}
+<p
+  class="footer-credits"
+  style="--footer-credits-font-size: {{ block.settings.font_size }}; {% if block.settings.text_color != blank %}--footer-credits-color: {{ block.settings.text_color }};{% endif %}"
+  {{ block.shopify_attributes }}
+>
+  &copy; {{ 'now' | date: '%Y' }}
+  {{ block.settings.copyright_name }}
+  |
+  <a
+    href="https://mainfactor.com"
+    class="footer__mainfactor"
+    target="_blank"
+    rel="noopener noreferrer"
+    >Powered by Mainfactor</a
+  >
+  {%- if block.settings.show_accessibility %}
+    |
+    <a
+      href="#"
+      class="footer__accessibility"
+      data-acsb="trigger"
+      data-acsb-custom-trigger="true"
+      tabindex="0"
+      role="button"
+      >Accessibility Adjustments</a
+    >
+  {%- endif %}
+</p>
+
+<script>
+  (function () {
+    // accessiBe opens its panel via data-acsb-custom-trigger; just stop the "#" link jumping to the top
+    document.addEventListener('click', function (event) {
+      if (event.target.closest('.footer__accessibility')) event.preventDefault();
+    });
+  })();
+</script>
+
+{% stylesheet %}
+  .footer-credits {
+    margin: 0;
+    width: 100%;
+    text-align: center;
+    font-size: var(--footer-credits-font-size, 0.75rem);
+    color: var(--footer-credits-color, inherit);
+  }
+
+  .footer-credits a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .footer-credits a:hover {
+    text-decoration: underline;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Footer credits",
+  "settings": [
+    {
+      "type": "text",
+      "id": "copyright_name",
+      "label": "Copyright name",
+      "default": "LW Entertainment Ltd."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_accessibility",
+      "label": "Show Accessibility Adjustments link",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "font_size",
+      "label": "Font size",
+      "options": [
+        { "value": "0.75rem", "label": "Small" },
+        { "value": "0.875rem", "label": "Medium" },
+        { "value": "1rem", "label": "Large" }
+      ],
+      "default": "0.75rem"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Footer credits"
+    }
+  ]
+}
+{% endschema %}

@@ -716,35 +716,19 @@
                 "padding-inline-end": 0
               },
               "blocks": {
-                "text_AWHgy6": {
-                  "type": "text",
-                  "name": "t:names.text",
+                "footer_credits_mf": {
+                  "type": "footer-credits",
                   "settings": {
-                    "text": "<p>© 2026 LW Entertainment Ltd.&nbsp;&nbsp;·&nbsp;&nbsp;Powered by Mainfactor</p>",
-                    "width": "100%",
-                    "max_width": "normal",
-                    "alignment": "center",
-                    "type_preset": "rte",
-                    "font": "var(--font-body--family)",
+                    "copyright_name": "LW Entertainment Ltd.",
+                    "show_accessibility": true,
                     "font_size": "0.75rem",
-                    "line_height": "normal",
-                    "letter_spacing": "normal",
-                    "case": "none",
-                    "wrap": "pretty",
-                    "text_color": "",
-                    "background": false,
-                    "background_color": "#00000026",
-                    "corner_radius": 0,
-                    "padding-block-start": 0,
-                    "padding-block-end": 0,
-                    "padding-inline-start": 0,
-                    "padding-inline-end": 0
+                    "text_color": ""
                   },
                   "blocks": {}
                 }
               },
               "block_order": [
-                "text_AWHgy6"
+                "footer_credits_mf"
               ]
             }
           },
